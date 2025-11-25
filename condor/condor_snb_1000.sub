@@ -1,0 +1,25 @@
+# HTCondor submission script for 1000 SNB generation
+# Splits into 100 jobs × 10 bursts each = 1000 total
+
+executable = /afs/cern.ch/work/e/evilla/private/dune/marley-gen/scripts/generate_snb_batch.py
+arguments = $(Process) 10
+
+output = logs/snb_$(Process).out
+error = logs/snb_$(Process).err
+log = logs/snb_$(Process).log
+
+# Request resources
+request_cpus = 1
+request_memory = 2GB
+request_disk = 1GB
++MaxRuntime = 7200
+
+# Environment variables for MARLEY
+environment = "MARLEY=/afs/cern.ch/work/e/evilla/private/dune/marley-1.2.0 PATH=/afs/cern.ch/work/e/evilla/private/dune/marley-1.2.0/build:$$PATH LD_LIBRARY_PATH=/afs/cern.ch/work/e/evilla/private/dune/marley-1.2.0/build:$$LD_LIBRARY_PATH"
+
+# Run in the working directory directly (no file transfer)
+should_transfer_files = NO
+initialdir = /afs/cern.ch/work/e/evilla/private/dune/marley-gen
+
+# Job array: 100 jobs (0-99)
+queue 100

@@ -38,3 +38,18 @@ Thumbs.db
 
 
 data
+# Temporary config files
+configs_temp/
+configs/test_*.js
+configs/*.hepevt
+configs/events.ascii
+
+# HTCondor logs
+logs/*.out
+logs/*.err
+logs/*.log
+
+# Data files (large)
+data/snb_1000/*.hepevt
+data/snb_1000/snb_*.hepevt
+
